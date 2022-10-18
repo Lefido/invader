@@ -1,0 +1,99 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: black;
+  z-index: 0;
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+
+#board {
+
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px dashed white;
+  margin-bottom: 2vh;
+}
+
+#title {
+  animation: title 3s ease-in-out infinite;
+
+  @keyframes title {
+    0% {
+      text-shadow: 0px 0px 2px green;
+      color: yellow;
+    }
+    50% {
+      text-shadow: 0px 0px 50px yellow;
+      color: green;
+      transform: scale(1.2);
+    }
+    75% {
+      filter: hue-rotate(360deg);
+    }
+    100% {
+      text-shadow: 0px 0px 2px green;
+      color: yellow;
+    }
+  }
+}
+
+#game {
+  background: url("./assets/fond-lunaire.jpg") no-repeat 100%/100%;
+  z-index: -1000;
+  width: 80%;
+  height: 85vh;
+  border: 1px dashed white;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+#player {
+  background-image: url("./assets/vaisseau.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+
+.missile {
+  z-index: 1;
+}
+
+.enemy {
+  //background-image: url("./assets/enemy.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  animation: enemy 1s ease-in-out infinite;
+
+  @keyframes enemy {
+    0% {
+      rotate: 0deg;
+    }
+    20% {
+      rotate: 15deg;
+    }
+    50% {
+      rotate: 0deg
+    }
+    70% {
+      rotate: -15deg;
+    }
+    100% {
+      rotate: 0deg;
+    }
+
+  }
+
+}
+
+

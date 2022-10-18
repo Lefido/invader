@@ -165,7 +165,7 @@ class Explosion {
 const player = new NewPlayer();
 
 setInterval(running, 1000 / 60);
-setInterval(timerEnemy, 1000)
+setInterval(timerEnemy, 5000);
 
 function running() {
 
@@ -181,7 +181,7 @@ function timerEnemy() {
 
     console.log(enemys.length, enemys)
     if (enemys.length === 0) {
-        newEnemy(1)
+        newEnemy(1 + rnd(9))
     }
 
 }
@@ -268,14 +268,16 @@ function collision_Miss_Enemy() {
 
             if (ob1x >= ob2x && ob1x <= ob2w && ob1y >= ob2y && ob1y <= ob2h) {
                 enemy.boom();
-                delete missiles[idx1];
+                // delete missiles[idx1];
+                missiles.splice(idx1, 1)
                 missile.objet.remove();
 
                 point = parseInt(score.innerHTML);
                 point += enemy.points;
                 score.innerHTML = point;
 
-                delete enemys[idx2];
+                // delete enemys[idx2];
+                enemys.splice(idx2, 1)
                 enemy.objet.remove();
 
             }

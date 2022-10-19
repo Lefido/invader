@@ -5,10 +5,9 @@ const gameHeight = game.offsetHeight;
 const score = document.querySelector('#score');
 
 const keys = {};
-const missiles = [];
+const tabMissile = [];
 const explosions = [];
-const enemys = [];
-
+const tabEnemy = [];
 
 class NewPlayer {
     constructor() {
@@ -48,7 +47,7 @@ class NewPlayer {
 
     missile() {
         let missile = new Missile(this.x + this.objet.offsetWidth / 2, this.y);
-        missiles.push(missile);
+        tabMissile.push(missile);
     }
 }
 
@@ -179,8 +178,8 @@ function running() {
 
 function timerEnemy() {
 
-    console.log(enemys.length, enemys)
-    if (enemys.length === 0) {
+    console.log(tabEnemy.length, tabEnemy)
+    if (tabEnemy.length === 0) {
         newEnemy(1 + rnd(9))
     }
 
@@ -189,7 +188,7 @@ function timerEnemy() {
 function newEnemy(nb) {
     for (i = 0; i < nb; i++) {
         let enemy = new Enemy()
-        enemys.push(enemy);
+        tabEnemy.push(enemy);
     }
 }
 
@@ -202,11 +201,11 @@ function pressKey() {
 
         console.log(e.code);
         if (e.code === "KeyI") {
-            // console.log(missiles);
+
         }
 
         if (e.code === "KeyS") {
-            enemys.pop();
+            tabEnemy.pop();
             let enemy = document.querySelector('.enemy');
             game.removeChild(enemy);
         }
@@ -217,8 +216,7 @@ function pressKey() {
 
         if (e.code === "KeyE") {
             newEnemy(1);
-            // let enemy = new Enemy()
-            // enemys.push(enemy);
+
         }
 
     };
@@ -237,30 +235,30 @@ function pressKey() {
 }
 
 function moveMissile() {
-    missiles.forEach(function (missile, idx) {
+    tabMissile.forEach(function (missile, idx) {
         missile.move();
         if (missile.y < -10) {
-            // missiles.splice(idx,0);
-            delete missiles[idx];
+
+            // delete tabMissile[idx];
+            tabMissile.splice(idx, 1)
             missile.objet.remove();
         }
     });
 }
 
 function moveEnemy() {
-    enemys.forEach(function (enemy, idx) {
+    tabEnemy.forEach(function (enemy, idx) {
         enemy.move();
     });
 }
 
-
 function collision_Miss_Enemy() {
 
-    missiles.forEach((missile, idx1) => {
+    tabMissile.forEach((missile, idx1) => {
         let ob1x = missile.x;
         let ob1y = missile.y;
 
-        enemys.forEach((enemy, idx2) => {
+        tabEnemy.forEach((enemy, idx2) => {
             let ob2x = enemy.x;
             let ob2y = enemy.y;
             let ob2w = enemy.x + enemy.objet.offsetWidth;
@@ -268,16 +266,14 @@ function collision_Miss_Enemy() {
 
             if (ob1x >= ob2x && ob1x <= ob2w && ob1y >= ob2y && ob1y <= ob2h) {
                 enemy.boom();
-                // delete missiles[idx1];
-                missiles.splice(idx1, 1)
+                tabMissile.splice(idx1, 1)
                 missile.objet.remove();
 
-                point = parseInt(score.innerHTML);
+                let point = parseInt(score.innerHTML);
                 point += enemy.points;
                 score.innerHTML = point;
 
-                // delete enemys[idx2];
-                enemys.splice(idx2, 1)
+                tabEnemy.splice(idx2, 1)
                 enemy.objet.remove();
 
             }

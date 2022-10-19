@@ -45,7 +45,8 @@ body {
 }
 
 #game {
-  background: url("./assets/fond-lunaire.jpg") no-repeat 100%/100%;
+  background: 100%/200% no-repeat url("./assets/fond-lunaire.jpg");
+  background-size: 100% 100%;
   z-index: -1000;
   width: 80%;
   height: 85vh;
